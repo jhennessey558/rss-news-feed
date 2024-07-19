@@ -1,0 +1,33 @@
+<div class="rss-feed container">
+  <header class="header">
+    <h1 class="title">RSS Feed</h1>
+    <nav class="nav">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+  
+  <div *ngIf="newsSites?.length" class="content">
+    <div class="banners">
+      <div *ngFor="let site of newsSites" class="banner" (click)="selectSite(site.site, site.url)">
+        <img [src]="site.headerImage" alt="{{ site.site }}" class="banner-image">
+        <p>{{ site.site }}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selectedSite" class="feed-section">
+    <h2>{{ selectedSite }} News</h2>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <ul class="feed-items">
+      <li *ngFor="let item of selectedFeedItems">
+        <a [href]="item.link" target="_blank">{{ item.title }}</a>
+        <p>{{ item.pubDate | date }}</p>
+        <p>{{ item.description }}</p>
+      </li>
+    </ul>
+  </div>
+  <footer class="footer">
+    <p>&copy; 2024 RSS News Feed</p>
+  </footer>
+</div>
